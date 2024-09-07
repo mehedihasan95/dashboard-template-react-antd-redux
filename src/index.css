@@ -1,0 +1,20 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    background-color: transparent;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: transparent;
+  }
+}
