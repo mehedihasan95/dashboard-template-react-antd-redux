@@ -1,6 +1,6 @@
 import {
+  Avatar,
   Badge,
-  Breakpoint,
   Button,
   Dropdown,
   Flex,
@@ -10,7 +10,7 @@ import {
   Typography,
 } from "antd";
 import React from "react";
-import Iconify from "../../utilities/IconifyConfig/IconifyConfig";
+import Iconify from "../../../utilities/IconifyConfig/IconifyConfig";
 
 const items: MenuProps["items"] = [
   {
@@ -24,11 +24,6 @@ const items: MenuProps["items"] = [
     icon: <Iconify icon='ic:round-settings' />,
   },
   {
-    key: "3",
-    label: "Help Center",
-    icon: <Iconify icon='bi:question' />,
-  },
-  {
     key: "4",
     label: "Logout",
     danger: true,
@@ -37,11 +32,11 @@ const items: MenuProps["items"] = [
 ];
 
 interface Props {
-  breakPoint: Partial<Record<Breakpoint, boolean>>;
+  xs: boolean | undefined;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LayoutHeader: React.FC<Props> = ({ breakPoint, setOpen }) => {
+const LayoutHeader: React.FC<Props> = ({ xs, setOpen }) => {
   return (
     <Layout.Header
       style={{
@@ -50,23 +45,46 @@ const LayoutHeader: React.FC<Props> = ({ breakPoint, setOpen }) => {
         maxHeight: "100%",
         display: "flex",
         alignItems: "center",
+        position: "sticky",
+        top: 0,
       }}
     >
       <Flex align='center' justify='space-between' style={{ width: "100%" }}>
         <Space>
-          {breakPoint?.xs && (
+          {xs && (
             <Button
               onClick={() => setOpen(true)}
               type='text'
               icon={<Iconify icon='pepicons-pop:menu' />}
             />
           )}
-          <Typography.Text>Good Night!</Typography.Text>
+          <div>
+            <Typography.Text
+              style={{
+                display: "block",
+                lineHeight: 1,
+                fontSize: xs ? "11px" : "14px",
+              }}
+            >
+              Welcome,
+            </Typography.Text>
+            <Typography.Text
+              style={{
+                display: "block",
+                lineHeight: 1,
+                fontWeight: 600,
+                fontSize: xs ? "12px" : "16px",
+              }}
+            >
+              Mehedi Hasan
+            </Typography.Text>
+          </div>
         </Space>
 
         <Flex align='center' gap={20}>
           <Badge count={100}>
             <Button
+              size='large'
               shape='circle'
               type='default'
               icon={
@@ -74,17 +92,13 @@ const LayoutHeader: React.FC<Props> = ({ breakPoint, setOpen }) => {
               }
             />
           </Badge>
-          <Button
-            shape='circle'
-            type='default'
-            icon={<Iconify icon='line-md:moon-rising-filled-loop' />}
-          />
 
           <Dropdown menu={{ items }} trigger={["click"]}>
-            <Button
+            <Avatar
+              size='large'
               shape='circle'
-              type='default'
-              icon={<Iconify icon='mingcute:user-5-fill' />}
+              style={{ cursor: "pointer" }}
+              src='https://i.pinimg.com/564x/70/f2/f6/70f2f613ee6b58351388385e0c657ed7.jpg'
             />
           </Dropdown>
         </Flex>
