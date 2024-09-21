@@ -47,6 +47,7 @@ const LayoutHeader: React.FC<Props> = ({ xs, setOpen }) => {
         alignItems: "center",
         position: "sticky",
         top: 0,
+        zIndex: 3,
       }}
     >
       <Flex align='center' justify='space-between' style={{ width: "100%" }}>

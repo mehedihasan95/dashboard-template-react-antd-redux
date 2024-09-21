@@ -12,7 +12,7 @@ const LayoutFooter: React.FC = () => {
         <Col span={24} lg={12}>
           <Flex justify={xs ? "center" : "flex-start"}>
             <Typography.Text>
-              © {year} <strong>M360ICT.</strong> All rights reserved.
+              Copyright © {year} <strong>M360ICT.</strong> All rights reserved.
             </Typography.Text>
           </Flex>
         </Col>

@@ -9,6 +9,11 @@ import SingleInvoice from "../modules/Invoices/components/SingleInvoice";
 import EBLBankLtd from "../modules/Accounts/pages/EBLBankLtd";
 import Profile from "../modules/Setup/pages/Profile";
 import Settings from "../modules/Setup/pages/Settings";
+import Auth from "../modules/Auth/pages/Auth";
+import Login from "../modules/Auth/pages/Login";
+import SendOTP from "../modules/Auth/components/SendOTP";
+import MatchOTP from "../modules/Auth/components/MatchOTP";
+import NewPassword from "../modules/Auth/components/NewPassword";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +73,28 @@ const router = createBrowserRouter([
             element: <Settings />,
           },
         ],
+      },
+    ],
+  },
+  {
+    path: "/auth",
+    element: <Auth />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "send-otp",
+        element: <SendOTP />,
+      },
+      {
+        path: "match-otp",
+        element: <MatchOTP />,
+      },
+      {
+        path: "new-password",
+        element: <NewPassword />,
       },
     ],
   },
