@@ -3,13 +3,13 @@ import { RootState } from "../store";
 
 type AuthStateType = {
   success: boolean;
-  token: string | null;
+  token: string | undefined;
   message?: string;
 };
 
 const initialState: AuthStateType = {
   success: false,
-  token: null,
+  token: undefined,
   message: undefined,
 };
 
@@ -23,7 +23,7 @@ const authSlice = createSlice({
     },
     clearAuth: (state) => {
       state.success = false;
-      state.token = null;
+      state.token = undefined;
       state.message = undefined;
     },
     setMessage: (state, { payload }: PayloadAction<string>) => {

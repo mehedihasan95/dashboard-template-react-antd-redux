@@ -14,11 +14,12 @@ import Login from "../modules/Auth/pages/Login";
 import SendOTP from "../modules/Auth/components/SendOTP";
 import MatchOTP from "../modules/Auth/components/MatchOTP";
 import NewPassword from "../modules/Auth/components/NewPassword";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout />,
+    element: <PrivateRouter children={<MainLayout />} />,
     errorElement: <NotFound />,
     children: [
       {

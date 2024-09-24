@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import authReducer from "./features/authSlice";
 import api from "./api/api";
-import themeReducer from "./features/themeSlice";
+import authSlice from "./features/authSlice";
+import themeSlice from "./features/themeSlice";
+import notificationSlice from "./features/notificationSlice";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
 const persistConfig = {
   key: "ROOT_WEB_NAME",
@@ -13,8 +15,9 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
-  auth: authReducer,
-  theme: themeReducer,
+  auth: authSlice,
+  theme: themeSlice,
+  notification: notificationSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -29,7 +32,11 @@ const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export default store;

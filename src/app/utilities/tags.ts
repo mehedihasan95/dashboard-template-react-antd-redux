@@ -11,7 +11,7 @@ export type Tag = {
   id: `${TagType}_ID`;
 };
 
-export function createTag(type: TagType): Tag {
+export function CREATE_TAGS(type: TagType): Tag {
   return {
     type,
     id: `${type}_ID`,

@@ -1,6 +1,6 @@
 import { Divider, Flex, Typography } from "antd";
 import React from "react";
-import Iconify from "../../../utilities/IconifyConfig/IconifyConfig";
+import Iconify from "../../../configuration/IconifyConfig/IconifyConfig";
 
 const TopSection: React.FC = () => {
   return (

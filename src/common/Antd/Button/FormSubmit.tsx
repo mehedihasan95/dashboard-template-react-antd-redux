@@ -1,6 +1,6 @@
 import { Button, ButtonProps, Form } from "antd";
 import React from "react";
-import Iconify from "../../../utilities/IconifyConfig/IconifyConfig";
+import Iconify from "../../../configuration/IconifyConfig/IconifyConfig";
 
 interface Props extends ButtonProps {
   name: string;

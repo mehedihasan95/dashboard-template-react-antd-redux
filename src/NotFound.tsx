@@ -7,7 +7,7 @@ import {
   useNavigate,
   useRouteError,
 } from "react-router-dom";
-import Iconify from "./utilities/IconifyConfig/IconifyConfig";
+import Iconify from "./configuration/IconifyConfig/IconifyConfig";
 
 const NotFound: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();

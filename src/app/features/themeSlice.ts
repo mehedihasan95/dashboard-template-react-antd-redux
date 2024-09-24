@@ -43,7 +43,7 @@ const themeSlice = createSlice({
       {
         payload,
       }: PayloadAction<{
-        type: "PRIMARY_COLOR" | "FONT_SIZE";
+        type: "PRIMARY_COLOR" | "FONT_SIZE" | "FONT_FAMILY";
         value: string | number;
       }>
     ) => {
@@ -57,6 +57,12 @@ const themeSlice = createSlice({
         case "FONT_SIZE":
           if (typeof payload.value === "number") {
             state.fontSize = payload.value;
+          }
+          break;
+
+        case "FONT_FAMILY":
+          if (typeof payload.value === "string") {
+            state.fontFamily = payload.value;
           }
           break;
 

@@ -126,19 +126,11 @@ export const fontFamilies: { label: string; value: string }[] = [
     value: "Roboto, sans-serif",
   },
   {
-    label: "Archivo",
-    value: "Archivo, sans-serif",
+    label: "Poppins",
+    value: "Poppins, sans-serif",
   },
   {
-    label: "Hind Siliguri",
-    value: "Hind Siliguri, sans-serif",
-  },
-  {
-    label: "Nunito Sans",
-    value: "Nunito Sans, sans-serif",
-  },
-  {
-    label: "Rubik",
-    value: "Rubik, sans-serif",
+    label: "Roboto Slab",
+    value: "Roboto Slab, serif",
   },
 ];

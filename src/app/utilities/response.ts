@@ -8,8 +8,8 @@ export type ApiResponse<T> = Partial<{
   token: string;
 }>;
 
-export type ApiResult<T> = Partial<{
-  data: T;
+export type ApiResult = Partial<{
+  data: unknown;
   success: boolean;
   message: string;
 }>;

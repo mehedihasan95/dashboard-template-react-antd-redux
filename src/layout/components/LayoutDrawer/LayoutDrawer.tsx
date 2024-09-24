@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import { navigationMenu, renderMenuItem } from "../../utilities/navigationMenu";
 import BottomSection from "../LayoutMenu/BottomSection";
 import useBreakpoints from "../../../hooks/useBreakpoints";
-import { useSelector } from "react-redux";
 import { ThemeState } from "../../../app/features/themeSlice";
+import { useAppSelector } from "../../../app/store";
 
 interface Props {
   open: boolean;
@@ -14,7 +14,7 @@ interface Props {
 
 const LayoutDrawer: React.FC<Props> = ({ open, setOpen, siderWidth }) => {
   const { lg } = useBreakpoints();
-  const { siderBg } = useSelector(ThemeState);
+  const { siderBg } = useAppSelector(ThemeState);
 
   useEffect(() => {
     if (lg) setOpen(false);

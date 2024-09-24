@@ -8,7 +8,7 @@ import {
 import { RootState } from "../store";
 import { clearAuth } from "../features/authSlice";
 import { TagTypes } from "../utilities/tags";
-import siteConfig from "../../settings/siteConfig";
+import siteConfig from "../../settings/site.settings";
 import { errorStatus } from "../utilities/response";
 
 export const baseUrl: string = siteConfig.urls.isDev

@@ -10,7 +10,7 @@ import {
   Typography,
 } from "antd";
 import React from "react";
-import Iconify from "../../../utilities/IconifyConfig/IconifyConfig";
+import Iconify from "../../../configuration/IconifyConfig/IconifyConfig";
 
 const items: MenuProps["items"] = [
   {

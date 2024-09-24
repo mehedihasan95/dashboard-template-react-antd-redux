@@ -1,11 +1,14 @@
 import { Avatar, Card, Space, Tooltip, Typography } from "antd";
 import React from "react";
-import { useDispatch } from "react-redux";
 import { clearAuth } from "../../../app/features/authSlice";
 import CommonButton from "../../../common/Antd/Button/CommonButton";
+import { useAppDispatch } from "../../../app/store";
+import { useNavigate } from "react-router-dom";
+import api from "../../../app/api/api";
 
 const BottomSection: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   return (
     <Card
@@ -56,7 +59,11 @@ const BottomSection: React.FC = () => {
       extra={
         <Tooltip title='Do you want to logout?' color='red'>
           <CommonButton
-            onClick={() => dispatch(clearAuth())}
+            onClick={() => {
+              dispatch(clearAuth());
+              dispatch(api.util.resetApiState());
+              navigate("/auth/login");
+            }}
             icon='ant-design:logout-outlined'
             type='text'
             danger

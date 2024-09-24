@@ -1,63 +1,91 @@
-import { Form, FormProps, Input, Space, Typography } from "antd";
-import React from "react";
-import useBreakpoints from "../../../hooks/useBreakpoints";
-import { LoginTypes } from "../types/AuthTypes";
-import FormItem from "../../../common/Antd/Form/FormItem";
-import { REQUIRED } from "../../../settings/constants";
-import FormBody from "../../../common/Antd/Form/FormBody";
-import { Link } from "react-router-dom";
+import { Alert, Form, FormProps, Input, Typography } from "antd";
+import React, { useEffect } from "react";
+import { AuthError, LoginTypes } from "../types/AuthTypes";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import FormSubmit from "../../../common/Antd/Button/FormSubmit";
+import Iconify from "../../../configuration/IconifyConfig/IconifyConfig";
+import AuthHeader from "../components/AuthHeader";
+import { useLoginMutation } from "../api/authEndpoint";
+import { useAppDispatch, useAppSelector } from "../../../app/store";
+import {
+  AuthState,
+  clearMessage,
+  setMessage,
+} from "../../../app/features/authSlice";
 
 const Login: React.FC = () => {
-  const { lg } = useBreakpoints();
+  const [login, { isLoading }] = useLoginMutation();
+  const { message } = useAppSelector(AuthState);
+  const dispatch = useAppDispatch();
   const [form] = Form.useForm();
 
-  const onFinish: FormProps<LoginTypes>["onFinish"] = (values) => {
-    console.log("Success:", values);
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const from: string = state?.from?.pathname || "/";
+
+  const onFinish: FormProps<LoginTypes>["onFinish"] = async (values) => {
+    try {
+      const { success } = await login(values).unwrap();
+      if (success) return navigate(from);
+    } catch (error) {
+      const { status, data } = error as AuthError;
+      if (status === "FETCH_ERROR") {
+        dispatch(
+          setMessage(
+            "Due to maintenance, our server is presently unavailable. Please try again later."
+          )
+        );
+      } else {
+        dispatch(setMessage(data.message));
+      }
+    }
   };
+
+  useEffect(() => {
+    if (message) {
+      setTimeout(() => {
+        dispatch(clearMessage());
+      }, 5000);
+    }
+  }, [message]);
 
   return (
     <React.Fragment>
-      <>
-        <Space
-          direction='vertical'
-          align='center'
-          style={{ width: "100%", marginBottom: "3rem" }}
-        >
-          <Typography.Text strong style={{ fontSize: lg ? "1.5rem" : "1rem" }}>
-            WELCOME BACK!
-          </Typography.Text>
-          <Typography.Text type='secondary'>
-            Enter your email and password to sign in
-          </Typography.Text>
-        </Space>
-      </>
-
-      <FormBody
-        form={form}
-        buttonLabel='Submit'
-        loading={false}
-        onFinish={onFinish}
-        content={
-          <>
-            <FormItem<LoginTypes>
-              label='Enter email address'
-              name='email'
-              rules={[{ required: true, message: REQUIRED }]}
-              content={<Input placeholder='e.g: example@some.com' />}
-            />
-            <FormItem<LoginTypes>
-              label='Enter password'
-              name='password'
-              rules={[{ required: true, message: REQUIRED }]}
-              content={<Input.Password placeholder='********' />}
-            />
-          </>
-        }
+      <AuthHeader
+        title='Welcome back!'
+        description='Enter your email and password to login'
       />
-      <Typography.Paragraph type='danger'>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-        doloribus nemo totam quasi sint nihil.
-      </Typography.Paragraph>
+      <Form form={form} onFinish={onFinish} layout='vertical'>
+        <Form.Item<LoginTypes>
+          label='Enter Email'
+          name='email'
+          rules={[{ required: true }]}
+        >
+          <Input
+            prefix={<Iconify icon='ant-design:user-outlined' />}
+            placeholder='e.g: some@example.com'
+          />
+        </Form.Item>
+
+        <Form.Item<LoginTypes>
+          label='Enter Password'
+          name='password'
+          rules={[{ required: true }]}
+        >
+          <Input.Password
+            prefix={<Iconify icon='ant-design:lock-outlined' />}
+            placeholder='e.g: ********'
+          />
+        </Form.Item>
+        <FormSubmit name='Login' loading={isLoading} />
+      </Form>
+
+      {message && (
+        <Typography.Paragraph>
+          <Alert type='error' message={message} />
+        </Typography.Paragraph>
+      )}
+
       <Link to='/auth/send-otp'>
         <Typography.Link>Forgot password!</Typography.Link>
       </Link>

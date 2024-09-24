@@ -4,9 +4,10 @@ import router from "./router/Router";
 import "./App.css";
 import { App, ConfigProvider, FloatButton, theme } from "antd";
 import { Helmet } from "react-helmet-async";
-import siteConfig from "./settings/siteConfig";
-import { useSelector } from "react-redux";
+import siteConfig from "./settings/site.settings";
 import { ThemeState } from "./app/features/themeSlice";
+import { useAppSelector } from "./app/store";
+import NotificationConfig from "./configuration/NotificationConfig/NotificationConfig";
 
 const MyApp: React.FC = () => {
   const {
@@ -17,7 +18,7 @@ const MyApp: React.FC = () => {
     siderBg,
     itemBg,
     headerBg,
-  } = useSelector(ThemeState);
+  } = useAppSelector(ThemeState);
 
   const isLight: boolean = mode === "light" ? true : false;
 
@@ -46,6 +47,7 @@ const MyApp: React.FC = () => {
     >
       <App>
         <RouterProvider router={router} />
+        <NotificationConfig />
         <FloatButton.BackTop />
         <Helmet>
           <title>{siteConfig.name}</title>

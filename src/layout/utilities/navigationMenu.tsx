@@ -1,6 +1,6 @@
 import { MenuProps } from "antd";
 import { Link } from "react-router-dom";
-import Iconify from "../../utilities/IconifyConfig/IconifyConfig";
+import Iconify from "../../configuration/IconifyConfig/IconifyConfig";
 
 export type NavigationItem = {
   key: string;

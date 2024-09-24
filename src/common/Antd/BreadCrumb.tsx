@@ -1,7 +1,7 @@
 import React from "react";
 import { Breadcrumb, Space } from "antd";
 import { Link, useLocation } from "react-router-dom";
-import Iconify from "../../utilities/IconifyConfig/IconifyConfig";
+import Iconify from "../../configuration/IconifyConfig/IconifyConfig";
 
 const capitalize = (text: string): string =>
   text.charAt(0).toUpperCase() + text.slice(1);

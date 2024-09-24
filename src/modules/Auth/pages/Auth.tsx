@@ -1,9 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { auth_bg } from "../../../settings/image.collection";
+import { auth_bg } from "../../../utilities/image.collection";
 import { Card } from "antd";
 
 const Auth: React.FC = () => {
+  const year: number = new Date().getFullYear();
   return (
     <div style={{ minHeight: "100vh", background: "#f5f5f5" }}>
       <div
@@ -63,7 +64,11 @@ const Auth: React.FC = () => {
           padding: "0.5rem",
         }}
       >
-        Copyright © 2024 <strong>M360ICT.</strong> All rights reserved.
+        Copyright © {year}{" "}
+        <a href='https://m360ict.com/' target='_blank'>
+          M360ICT.
+        </a>{" "}
+        All rights reserved.
       </footer>
     </div>
   );
