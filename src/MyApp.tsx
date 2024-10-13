@@ -8,6 +8,7 @@ import siteConfig from "./settings/site.settings";
 import { ThemeState } from "./app/features/themeSlice";
 import { useAppSelector } from "./app/store";
 import NotificationConfig from "./configuration/NotificationConfig/NotificationConfig";
+import ModalConfig from "./configuration/ModalConfig/ModalConfig";
 
 const MyApp: React.FC = () => {
   const {
@@ -31,7 +32,6 @@ const MyApp: React.FC = () => {
           fontFamily,
           fontSize,
         },
-
         components: {
           Layout: {
             siderBg,
@@ -48,6 +48,7 @@ const MyApp: React.FC = () => {
       <App>
         <RouterProvider router={router} />
         <NotificationConfig />
+        <ModalConfig />
         <FloatButton.BackTop />
         <Helmet>
           <title>{siteConfig.name}</title>

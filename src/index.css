@@ -11,6 +11,10 @@ body {
   scrollbar-width: thin;
 }
 
+.ant-table-body {
+  scrollbar-width: thin;
+}
+
 /* 
 @media (prefers-color-scheme: light) {
   :root {

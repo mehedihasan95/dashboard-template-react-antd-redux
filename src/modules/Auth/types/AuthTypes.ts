@@ -3,6 +3,13 @@ export type LoginTypes = {
   password: string;
 };
 
+export type ForgotPassword = Partial<{
+  email: string;
+  otp: string;
+  password: string;
+  confirm_password: string;
+}>;
+
 export type AuthError = {
   status:
     | number

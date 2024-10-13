@@ -1,5 +1,5 @@
 import { Alert, Form, FormProps, Input, Typography } from "antd";
-import React, { useEffect } from "react";
+import React from "react";
 import { AuthError, LoginTypes } from "../types/AuthTypes";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import FormSubmit from "../../../common/Antd/Button/FormSubmit";
@@ -7,11 +7,7 @@ import Iconify from "../../../configuration/IconifyConfig/IconifyConfig";
 import AuthHeader from "../components/AuthHeader";
 import { useLoginMutation } from "../api/authEndpoint";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
-import {
-  AuthState,
-  clearMessage,
-  setMessage,
-} from "../../../app/features/authSlice";
+import { AuthState, setMessage } from "../../../app/features/authSlice";
 
 const Login: React.FC = () => {
   const [login, { isLoading }] = useLoginMutation();
@@ -41,14 +37,6 @@ const Login: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    if (message) {
-      setTimeout(() => {
-        dispatch(clearMessage());
-      }, 5000);
-    }
-  }, [message]);
-
   return (
     <React.Fragment>
       <AuthHeader
@@ -57,7 +45,7 @@ const Login: React.FC = () => {
       />
       <Form form={form} onFinish={onFinish} layout='vertical'>
         <Form.Item<LoginTypes>
-          label='Enter Email'
+          label='Enter Email Address'
           name='email'
           rules={[{ required: true }]}
         >
@@ -77,15 +65,15 @@ const Login: React.FC = () => {
             placeholder='e.g: ********'
           />
         </Form.Item>
+
         <FormSubmit name='Login' loading={isLoading} />
       </Form>
 
       {message && (
         <Typography.Paragraph>
-          <Alert type='error' message={message} />
+          <Alert type='error' message={message} banner />
         </Typography.Paragraph>
       )}
-
       <Link to='/auth/send-otp'>
         <Typography.Link>Forgot password!</Typography.Link>
       </Link>

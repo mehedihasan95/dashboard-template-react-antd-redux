@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { auth_bg } from "../../../utilities/image.collection";
 import { Card } from "antd";
+import { AuthState, clearMessage } from "../../../app/features/authSlice";
+import { useAppDispatch, useAppSelector } from "../../../app/store";
 
 const Auth: React.FC = () => {
   const year: number = new Date().getFullYear();
+  const { message } = useAppSelector(AuthState);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (message) {
+      setTimeout(() => {
+        dispatch(clearMessage());
+      }, 5000);
+    }
+  }, [message]);
+
   return (
     <div style={{ minHeight: "100vh", background: "#f5f5f5" }}>
       <div

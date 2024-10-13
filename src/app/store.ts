@@ -5,19 +5,23 @@ import api from "./api/api";
 import authSlice from "./features/authSlice";
 import themeSlice from "./features/themeSlice";
 import notificationSlice from "./features/notificationSlice";
+import modalSlice from "./features/modalSlice";
+import filterSlice from "./features/filterSlice";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
 const persistConfig = {
   key: "ROOT_WEB_NAME",
   storage,
-  whitelist: ["auth", "theme"],
+  whitelist: ["auth", "theme", "filter"],
 };
 
 const rootReducer = combineReducers({
-  [api.reducerPath]: api.reducer,
   auth: authSlice,
   theme: themeSlice,
+  modal: modalSlice,
+  filter: filterSlice,
   notification: notificationSlice,
+  [api.reducerPath]: api.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

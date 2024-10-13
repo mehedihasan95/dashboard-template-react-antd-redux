@@ -1,24 +1,33 @@
-import { Space, Typography } from "antd";
+import { Form, Input, type FormProps } from "antd";
 import React from "react";
-import useBreakpoints from "../../../hooks/useBreakpoints";
+import AuthHeader from "./AuthHeader";
+import { useMatchOTPMutation } from "../api/authEndpoint";
+import { ForgotPassword } from "../types/AuthTypes";
+import FormSubmit from "../../../common/Antd/Button/FormSubmit";
 
 const MatchOTP: React.FC = () => {
-  const { lg } = useBreakpoints();
+  const [sendOTP, { isLoading }] = useMatchOTPMutation();
+
+  const [form] = Form.useForm();
+
+  const onFinish: FormProps<ForgotPassword>["onFinish"] = async (values) => {
+    await sendOTP(values);
+  };
+
   return (
     <React.Fragment>
       <>
-        <Space
-          direction='vertical'
-          align='center'
-          style={{ width: "100%", marginBottom: "3rem" }}
-        >
-          <Typography.Text strong style={{ fontSize: lg ? "1.5rem" : "1rem" }}>
-            MATCH OTP
-          </Typography.Text>
-          <Typography.Text type='secondary'>
-            Enter your email and password to sign in
-          </Typography.Text>
-        </Space>
+        <AuthHeader title='Match OTP' description='sdsdsds' />
+        <Form form={form} onFinish={onFinish} layout='vertical'>
+          <Form.Item<ForgotPassword>
+            label='Enter your OTP'
+            name='otp'
+            rules={[{ required: true }]}
+          >
+            <Input.OTP style={{ width: "100%" }} />
+          </Form.Item>
+          <FormSubmit name='Verify OTP' loading={isLoading} />
+        </Form>
       </>
     </React.Fragment>
   );

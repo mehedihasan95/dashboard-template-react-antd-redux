@@ -5,10 +5,13 @@ import { navigationMenu, renderMenuItem } from "../../utilities/navigationMenu";
 import { getOpenKeys } from "../../utilities/helper";
 import TopSection from "./TopSection";
 import BottomSection from "./BottomSection";
+import { useAppDispatch } from "../../../app/store";
+import { resetFilter } from "../../../app/features/filterSlice";
 
 const LayoutMenu: React.FC = () => {
   const location = useLocation();
   const defaultOpenKeys = getOpenKeys(navigationMenu, location.pathname);
+  const dispatch = useAppDispatch();
 
   return (
     <React.Fragment>
@@ -25,6 +28,7 @@ const LayoutMenu: React.FC = () => {
           <Menu
             className='custom-menu'
             mode='inline'
+            onClick={() => dispatch(resetFilter())}
             items={navigationMenu.map(renderMenuItem)}
             selectedKeys={[location.pathname]}
             defaultOpenKeys={defaultOpenKeys}

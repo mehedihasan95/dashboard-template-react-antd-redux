@@ -1,10 +1,14 @@
 export type ProfileTypes = {
-  id: number;
-  username: string;
-  name: string;
+  restaurant_id: number;
+  company_name: string | null;
   email: string;
-  address: string;
-  phone_number: string;
-  photo: string;
-  permissions: string[];
+  owner_name: string;
+  phone: string;
+  restaurant_address: string;
+  restaurant_bin_number: string;
+  restaurant_hotline: string;
+  restaurant_logo: string;
+  restaurant_name: string;
+  restaurant_owner_name: string;
+  restaurant_version: number;
 };

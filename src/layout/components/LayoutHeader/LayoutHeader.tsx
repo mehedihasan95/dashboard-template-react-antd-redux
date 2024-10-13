@@ -85,7 +85,6 @@ const LayoutHeader: React.FC<Props> = ({ xs, setOpen }) => {
         <Flex align='center' gap={20}>
           <Badge count={100}>
             <Button
-              size='large'
               shape='circle'
               type='default'
               icon={
@@ -96,7 +95,6 @@ const LayoutHeader: React.FC<Props> = ({ xs, setOpen }) => {
 
           <Dropdown menu={{ items }} trigger={["click"]}>
             <Avatar
-              size='large'
               shape='circle'
               style={{ cursor: "pointer" }}
               src='https://i.pinimg.com/564x/70/f2/f6/70f2f613ee6b58351388385e0c657ed7.jpg'

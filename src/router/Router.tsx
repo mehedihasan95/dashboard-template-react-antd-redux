@@ -15,6 +15,7 @@ import SendOTP from "../modules/Auth/components/SendOTP";
 import MatchOTP from "../modules/Auth/components/MatchOTP";
 import NewPassword from "../modules/Auth/components/NewPassword";
 import PrivateRouter from "./PrivateRouter";
+import Orders from "../modules/Orders/page/Orders";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Dashboard />,
+      },
+      {
+        path: "orders",
+        element: <Orders />,
       },
       {
         path: "students",

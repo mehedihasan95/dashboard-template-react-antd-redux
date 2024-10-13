@@ -35,13 +35,7 @@ const BreadCrumb: React.FC = () => {
     }),
   ];
 
-  return (
-    <Breadcrumb
-      style={{ margin: "5px 0" }}
-      separator='❯'
-      items={breadcrumbItems}
-    />
-  );
+  return <Breadcrumb separator='❯' items={breadcrumbItems} />;
 };
 
 export default BreadCrumb;

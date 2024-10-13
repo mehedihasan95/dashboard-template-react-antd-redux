@@ -3,13 +3,19 @@ import React from "react";
 import Iconify from "../../../configuration/IconifyConfig/IconifyConfig";
 
 interface Props extends ButtonProps {
-  name?: string;
+  name: string;
   icon?: string;
+  type?: "link" | "text" | "default" | "primary" | "dashed";
 }
 
-const CommonButton: React.FC<Props> = ({ name, icon, ...rest }) => {
+const CommonButton: React.FC<Props> = ({
+  name,
+  icon,
+  type = "primary",
+  ...rest
+}) => {
   return (
-    <Button icon={icon && <Iconify icon={icon} />} {...rest}>
+    <Button {...rest} type={type} icon={icon && <Iconify icon={icon} />}>
       {name}
     </Button>
   );

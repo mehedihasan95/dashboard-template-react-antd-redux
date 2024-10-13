@@ -22,11 +22,17 @@ const AuthHeader: React.FC<Props> = ({ title, description }) => {
           style={{
             fontSize: lg ? "1.5rem" : "1rem",
             textTransform: "uppercase",
+            display: "block",
           }}
         >
           {title}
         </Typography.Text>
-        <Typography.Text type='secondary'>{description}</Typography.Text>
+        <Typography.Text
+          type='secondary'
+          style={{ textAlign: "center", display: "block" }}
+        >
+          {description}
+        </Typography.Text>
       </Space>
     </React.Fragment>
   );

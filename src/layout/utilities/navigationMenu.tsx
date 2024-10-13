@@ -1,5 +1,5 @@
 import { MenuProps } from "antd";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Iconify from "../../configuration/IconifyConfig/IconifyConfig";
 
 export type NavigationItem = {
@@ -85,6 +85,21 @@ export const navigationMenu: NavigationItem[] = [
     ],
   },
   {
+    category: "RESTAURANT",
+    key: "restaurant",
+    label: "RESTAURANT",
+    icon: "carbon:restaurant",
+    children: [
+      {
+        key: "/orders",
+        to: "/orders",
+        label: "Orders",
+        icon: "lsicon:order-outline",
+      },
+    ],
+  },
+
+  {
     category: "PAYMENT",
     key: "payment",
     label: "PAYMENT",
@@ -102,7 +117,7 @@ export const navigationMenu: NavigationItem[] = [
     category: "SETTINGS",
     key: "settings",
     label: "SETTINGS",
-    icon: "mage:dollar",
+    icon: "uil:setting",
     children: [
       {
         key: "/setup/profile",
@@ -127,7 +142,16 @@ export const renderMenuItem = (
   label: item.children ? (
     item.label
   ) : (
-    <Link to={String(item.to)}>{item.label}</Link>
+    <NavLink
+      style={({ isActive }) => {
+        return {
+          fontWeight: isActive ? "bold" : "normal",
+        };
+      }}
+      to={String(item.to)}
+    >
+      {item.label}
+    </NavLink>
   ),
   icon: <Iconify icon={item.icon} />,
   children: item.children?.map(renderMenuItem),
