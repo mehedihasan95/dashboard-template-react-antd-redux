@@ -6,6 +6,7 @@ const PrintButton: React.FC<ButtonProps> = ({ ...rest }) => {
   return (
     <Button
       {...rest}
+      key='print'
       type='primary'
       icon={<Iconify icon='material-symbols:print' />}
     >

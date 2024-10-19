@@ -4,7 +4,6 @@ import {
   Dropdown,
   Flex,
   Input,
-  MenuProps,
   Row,
   Space,
   Tooltip,
@@ -29,11 +28,13 @@ interface Props {
   content: React.ReactNode;
   buttonLabel?: string;
   openModal?: ModalTypes;
-  showButton?: boolean;
-  showSearch?: boolean;
-  placeholder?: string;
-  showFilter?: boolean;
-  filterContent?: MenuProps["items"];
+  options?: {
+    showButton?: boolean;
+    showSearch?: boolean;
+    placeholder?: string;
+    showFilter?: boolean;
+  };
+  filterContent?: React.ReactNode[];
   filterData?: {
     [key: string]: string | number | boolean;
   };
@@ -44,10 +45,12 @@ const Container: React.FC<Props> = ({
   content,
   openModal,
   buttonLabel = "Create",
-  showButton = true,
-  showSearch = true,
-  placeholder = "Search",
-  showFilter = true,
+  options = {
+    showButton: true,
+    showSearch: true,
+    placeholder: "Search",
+    showFilter: true,
+  },
   filterContent,
   filterData,
 }) => {
@@ -55,8 +58,12 @@ const Container: React.FC<Props> = ({
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState<boolean>(false);
-  const items: MenuProps["items"] = filterContent;
   const [searchParams] = useSearchParams();
+
+  const items = filterContent?.map((item, index) => ({
+    key: String(index),
+    label: item,
+  }));
 
   const searchDebounce = useMemo(
     () =>
@@ -87,20 +94,20 @@ const Container: React.FC<Props> = ({
 
       <Row gutter={[10, 10]}>
         <Col span={24} lg={6}>
-          {showSearch && (
+          {options.showSearch && (
             <Input
               allowClear
               defaultValue={searchParams.get("key") || undefined}
               maxLength={50}
               prefix={<Iconify icon='flat-color-icons:search' />}
-              placeholder={placeholder}
+              placeholder={options.placeholder}
               onChange={(value) => searchDebounce(value.target.value)}
             />
           )}
         </Col>
         <Col span={24} lg={18}>
           <Flex justify='flex-end' align='center' gap={8} wrap>
-            {showButton && (
+            {options.showButton && (
               <Button
                 onClick={() => dispatch(showModal(openModal))}
                 type='primary'
@@ -110,7 +117,7 @@ const Container: React.FC<Props> = ({
               </Button>
             )}
 
-            {showFilter && (
+            {options.showFilter && (
               <>
                 <Dropdown.Button
                   open={open}
@@ -146,7 +153,7 @@ const Container: React.FC<Props> = ({
                   </Typography.Text>
                 </Dropdown.Button>
                 <Tooltip
-                  title='Filter reset'
+                  title='Filter Reset'
                   placement='topLeft'
                   children={
                     <Button

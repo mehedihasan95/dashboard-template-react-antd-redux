@@ -2,6 +2,7 @@ import { type Dispatch } from "@reduxjs/toolkit";
 import { openNotification } from "../features/notificationSlice";
 import { ApiResponse } from "./response";
 import { closeModal } from "../features/modalSlice";
+import { closeDrawer } from "../features/drawerSlice";
 
 interface QueryFulfilledResponse<T> {
   data: ApiResponse<T>;
@@ -22,6 +23,7 @@ export const onQueryResponse = async <T>(
   try {
     const response = await queryFulfilled;
     dispatch(closeModal());
+    dispatch(closeDrawer());
     dispatch(
       openNotification({
         description: message || response.data.message,

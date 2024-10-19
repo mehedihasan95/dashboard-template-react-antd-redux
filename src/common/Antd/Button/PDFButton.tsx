@@ -6,6 +6,7 @@ const PDFButton: React.FC<ButtonProps> = ({ ...rest }) => {
   return (
     <Button
       {...rest}
+      key='pdf'
       type='primary'
       icon={<Iconify icon='fluent:document-pdf-20-filled' />}
     >

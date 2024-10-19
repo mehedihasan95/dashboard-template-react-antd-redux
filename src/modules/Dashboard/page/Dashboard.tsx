@@ -1,36 +1,19 @@
-import { Column, ColumnConfig } from "@ant-design/charts";
+import { Col, Row } from "antd";
 import React from "react";
+import DailyExpenseCharts from "../components/DailyExpenseCharts";
+import DailyStatistics from "../components/DailyStatistics";
 
 const Dashboard: React.FC = () => {
-  const config: ColumnConfig = {
-    data: {
-      type: "fetch",
-      value:
-        "https://gw.alipayobjects.com/os/antfincdn/iPY8JFnxdb/dodge-padding.json",
-    },
-    xField: "月份",
-    yField: "月均降雨量",
-    colorField: "name",
-    group: true,
-    style: {
-      inset: 5,
-    },
-    onReady: ({ chart }) => {
-      try {
-        chart.on("afterrender", () => {
-          chart.emit("legend:filter", {
-            data: { channel: "color", values: ["London"] },
-          });
-        });
-      } catch (e) {
-        console.error(e);
-      }
-    },
-  };
-
   return (
     <React.Fragment>
-      <Column {...config} />
+      <Row gutter={[10, 10]}>
+        <Col span={24} lg={12}>
+          <DailyStatistics />
+        </Col>
+        <Col span={24} lg={12}>
+          <DailyExpenseCharts />
+        </Col>
+      </Row>
     </React.Fragment>
   );
 };

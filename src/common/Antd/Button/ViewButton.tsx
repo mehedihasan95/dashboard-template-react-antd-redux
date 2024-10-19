@@ -1,13 +1,25 @@
+import { Button, type ButtonProps } from "antd";
 import React from "react";
+import Iconify from "../../../configuration/IconifyConfig/IconifyConfig";
+import { Link } from "react-router-dom";
 
-const ViewButton: React.FC = () => {
+interface Props extends ButtonProps {
+  pathname: string;
+}
+
+const ViewButton: React.FC<Props> = ({ pathname, ...rest }) => {
   return (
-    <React.Fragment>
-      <p>
-        ViewButton module is currently under development. Stay tuned for
-        updates! 🚧🚩
-      </p>
-    </React.Fragment>
+    <Link state={location.pathname} to={pathname}>
+      <Button
+        {...rest}
+        key='view'
+        type='link'
+        size='small'
+        icon={<Iconify icon='lucide:view' />}
+      >
+        View this data
+      </Button>
+    </Link>
   );
 };
 

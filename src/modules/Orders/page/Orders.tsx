@@ -24,21 +24,16 @@ const Orders: React.FC = () => {
         openModal={{ title: "Create Order", content: <CreateOrder /> }}
         filterData={filterData}
         filterContent={[
-          {
-            key: "1",
-            label: (
-              <DatePicker.RangePicker
-                value={[dayjs(filters.from_date), dayjs(filters.to_date)]}
-                onChange={(_, dateString) =>
-                  setFilterData((prev) => ({
-                    ...prev,
-                    from_date: String(dateString[0]),
-                    to_date: String(dateString[1]),
-                  }))
-                }
-              />
-            ),
-          },
+          <DatePicker.RangePicker
+            value={[dayjs(filters.from_date), dayjs(filters.to_date)]}
+            onChange={(_, dateString) =>
+              setFilterData((prev) => ({
+                ...prev,
+                from_date: String(dateString[0]),
+                to_date: String(dateString[1]),
+              }))
+            }
+          />,
         ]}
       />
     </React.Fragment>

@@ -6,6 +6,7 @@ import authSlice from "./features/authSlice";
 import themeSlice from "./features/themeSlice";
 import notificationSlice from "./features/notificationSlice";
 import modalSlice from "./features/modalSlice";
+import drawerSlice from "./features/drawerSlice";
 import filterSlice from "./features/filterSlice";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   auth: authSlice,
   theme: themeSlice,
   modal: modalSlice,
+  drawer: drawerSlice,
   filter: filterSlice,
   notification: notificationSlice,
   [api.reducerPath]: api.reducer,

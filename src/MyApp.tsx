@@ -9,6 +9,7 @@ import { ThemeState } from "./app/features/themeSlice";
 import { useAppSelector } from "./app/store";
 import NotificationConfig from "./configuration/NotificationConfig/NotificationConfig";
 import ModalConfig from "./configuration/ModalConfig/ModalConfig";
+import DrawerConfig from "./configuration/DrawerConfig/DrawerConfig";
 
 const MyApp: React.FC = () => {
   const {
@@ -49,6 +50,7 @@ const MyApp: React.FC = () => {
         <RouterProvider router={router} />
         <NotificationConfig />
         <ModalConfig />
+        <DrawerConfig />
         <FloatButton.BackTop />
         <Helmet>
           <title>{siteConfig.name}</title>

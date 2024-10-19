@@ -1,13 +1,18 @@
+import { Button, type ButtonProps } from "antd";
 import React from "react";
+import Iconify from "../../../configuration/IconifyConfig/IconifyConfig";
 
-const EditButton: React.FC = () => {
+const EditButton: React.FC<ButtonProps> = ({ ...rest }) => {
   return (
-    <React.Fragment>
-      <p>
-        EditButton module is currently under development. Stay tuned for
-        updates! 🚧🚩
-      </p>
-    </React.Fragment>
+    <Button
+      {...rest}
+      key='edit'
+      type='link'
+      size='small'
+      icon={<Iconify icon='ic:outline-edit' />}
+    >
+      Edit this data
+    </Button>
   );
 };
 

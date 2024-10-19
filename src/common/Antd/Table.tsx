@@ -1,7 +1,15 @@
-import { Table as AntTable, Button, Typography, type TableProps } from "antd";
+import {
+  Table as AntTable,
+  Button,
+  Dropdown,
+  Typography,
+  type TableProps,
+} from "antd";
 import { useAppDispatch, useAppSelector } from "../../app/store";
 import { FilterState, addFilter } from "../../app/features/filterSlice";
 import Iconify from "../../configuration/IconifyConfig/IconifyConfig";
+import React from "react";
+import { useSearchParams } from "react-router-dom";
 
 interface Props<T> extends TableProps<T> {
   total: number | undefined;
@@ -64,3 +72,47 @@ const Table = <T extends object>({
 };
 
 export default Table;
+
+// TABLE COLUMN ACTION DROPDOWN
+export const TableActionDropdown = <T,>({
+  title = "Actions",
+  content,
+}: {
+  title?: string;
+  content: (record: T) => React.ReactElement[];
+}) => {
+  return {
+    title,
+    render: (_: unknown, record: T) => {
+      const items = content(record).map((item, index) => ({
+        key: String(index),
+        label: item,
+      }));
+      return (
+        <Dropdown
+          placement='bottomRight'
+          trigger={["click"]}
+          arrow
+          menu={{ items }}
+        >
+          <Button
+            type='text'
+            size='small'
+            icon={<Iconify icon='entypo:dots-three-horizontal' />}
+          />
+        </Dropdown>
+      );
+    },
+  };
+};
+
+// TABLE COLUMN SERIAL
+export const TableColumnSerial = () => {
+  const [searchParams] = useSearchParams();
+  const skip: number = Number(searchParams.get("skip")) || 0;
+  return {
+    title: "SL",
+    width: 60,
+    render: (_: unknown, __: unknown, index: number) => skip + index + 1,
+  };
+};

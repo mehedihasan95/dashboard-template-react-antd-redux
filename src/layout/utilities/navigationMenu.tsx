@@ -1,6 +1,7 @@
 import { MenuProps } from "antd";
 import { NavLink } from "react-router-dom";
 import Iconify from "../../configuration/IconifyConfig/IconifyConfig";
+import { truncateText } from "../../utilities/helper.function";
 
 export type NavigationItem = {
   key: string;
@@ -140,7 +141,7 @@ export const renderMenuItem = (
 ): Required<MenuProps>["items"][number] => ({
   key: item.key,
   label: item.children ? (
-    item.label
+    truncateText(item.label)
   ) : (
     <NavLink
       style={({ isActive }) => {
@@ -150,7 +151,7 @@ export const renderMenuItem = (
       }}
       to={String(item.to)}
     >
-      {item.label}
+      {truncateText(item.label)}
     </NavLink>
   ),
   icon: <Iconify icon={item.icon} />,

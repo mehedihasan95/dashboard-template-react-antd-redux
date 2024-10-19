@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb, Space } from "antd";
+import { Breadcrumb, Space, Typography } from "antd";
 import { Link, useLocation } from "react-router-dom";
 import Iconify from "../../configuration/IconifyConfig/IconifyConfig";
 
@@ -27,7 +27,7 @@ const BreadCrumb: React.FC = () => {
 
       return {
         title: isLastSegment ? (
-          capitalize(segment)
+          <Typography.Text strong>{capitalize(segment)}</Typography.Text>
         ) : (
           <Link to={routePath}>{capitalize(segment)}</Link>
         ),

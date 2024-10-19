@@ -1,5 +1,5 @@
 export type OrderTypes = {
-  invoice_id: number | string;
+  invoice_id: number;
   invoice_created_at: string;
   table_name: string;
   invoice_net_total: number;
