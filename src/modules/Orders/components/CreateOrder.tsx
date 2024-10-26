@@ -2,13 +2,14 @@ import { Form, Input, type FormProps } from "antd";
 import React from "react";
 import FormSubmit from "../../../common/Antd/Button/FormSubmit";
 import { sanitizeFormData } from "../../../utilities/helper.function";
-import { Select } from "../../../common/Antd";
+import { Select, Upload } from "../../../common/Antd";
 
 type FieldType = {
   username: string;
   email: string;
   phone?: string;
   is_active?: number;
+  image?: FileList;
 };
 
 const CreateOrder: React.FC = React.memo(() => {
@@ -17,7 +18,7 @@ const CreateOrder: React.FC = React.memo(() => {
       except: ["phone"],
       needs: ["is_active"],
     });
-    console.log(data);
+    console.log(Object.fromEntries(data));
   };
 
   return (
@@ -50,6 +51,10 @@ const CreateOrder: React.FC = React.memo(() => {
               { label: "Disable", value: 0 },
             ]}
           />
+        </Form.Item>
+
+        <Form.Item<FieldType> label='Upload your image' name='image'>
+          <Upload accept='image/*' />
         </Form.Item>
 
         <FormSubmit name='Submit' />

@@ -79,8 +79,8 @@ const Container: React.FC<Props> = ({
   }, [searchDebounce]);
 
   return (
-    <Space direction='vertical' style={{ width: "100%" }}>
-      <Flex justify='space-between' align='center' wrap>
+    <Space direction="vertical" style={{ width: "100%" }}>
+      <Flex justify="space-between" align="center" wrap>
         <Typography.Text
           strong
           style={{
@@ -99,19 +99,19 @@ const Container: React.FC<Props> = ({
               allowClear
               defaultValue={searchParams.get("key") || undefined}
               maxLength={50}
-              prefix={<Iconify icon='flat-color-icons:search' />}
+              prefix={<Iconify icon="flat-color-icons:search" />}
               placeholder={options.placeholder}
               onChange={(value) => searchDebounce(value.target.value)}
             />
           )}
         </Col>
         <Col span={24} lg={18}>
-          <Flex justify='flex-end' align='center' gap={8} wrap>
+          <Flex justify="flex-end" align="center" gap={8} wrap>
             {options.showButton && (
               <Button
                 onClick={() => dispatch(showModal(openModal))}
-                type='primary'
-                icon={<Iconify icon='mdi:add-bold' />}
+                type="primary"
+                icon={<Iconify icon="mdi:add-bold" />}
               >
                 {buttonLabel}
               </Button>
@@ -123,7 +123,39 @@ const Container: React.FC<Props> = ({
                   open={open}
                   trigger={["click"]}
                   style={{ width: "max-content" }}
-                  menu={{ items }}
+                  menu={{
+                    items: [
+                      ...(items || []),
+                      {
+                        type: "divider",
+                      },
+                      {
+                        label: (
+                          <Button
+                            icon={<Iconify icon="mynaui:filter" />}
+                            size="small"
+                            block
+                            type="link"
+                          >
+                            Filter Now
+                          </Button>
+                        ),
+                        key: "submit",
+                        onClick: () => {
+                          if (filterData) {
+                            Object.keys(filterData).forEach((key) => {
+                              dispatch(
+                                addRestFilter({
+                                  label: key,
+                                  value: filterData[key],
+                                })
+                              );
+                            });
+                          }
+                        },
+                      },
+                    ],
+                  }}
                   icon={
                     <Iconify
                       icon={
@@ -131,37 +163,23 @@ const Container: React.FC<Props> = ({
                       }
                     />
                   }
-                  type='default'
-                  placement='bottomRight'
+                  type="default"
+                  placement="bottomRight"
                   arrow
                   onOpenChange={() => setOpen(!open)}
-                  onClick={() => {
-                    if (filterData) {
-                      Object.keys(filterData).forEach((key) => {
-                        dispatch(
-                          addRestFilter({
-                            label: key,
-                            value: filterData[key],
-                          })
-                        );
-                      });
-                    }
-                  }}
                 >
-                  <Typography.Text>
-                    {open ? "Filter Now" : "Filter By"}
-                  </Typography.Text>
+                  <Typography.Text>Filter By</Typography.Text>
                 </Dropdown.Button>
                 <Tooltip
-                  title='Filter Reset'
-                  placement='topLeft'
+                  title="Filter Reset"
+                  placement="topLeft"
                   children={
                     <Button
                       onClick={() => {
                         dispatch(resetFilter());
                         navigate(window.location.pathname, { replace: true });
                       }}
-                      icon={<Iconify icon='carbon:reset' />}
+                      icon={<Iconify icon="carbon:reset" />}
                     />
                   }
                 />

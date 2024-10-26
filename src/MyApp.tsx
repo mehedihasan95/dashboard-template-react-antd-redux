@@ -10,6 +10,7 @@ import { useAppSelector } from "./app/store";
 import NotificationConfig from "./configuration/NotificationConfig/NotificationConfig";
 import ModalConfig from "./configuration/ModalConfig/ModalConfig";
 import DrawerConfig from "./configuration/DrawerConfig/DrawerConfig";
+import useBreakpoints from "./hooks/useBreakpoints";
 
 const MyApp: React.FC = () => {
   const {
@@ -21,13 +22,24 @@ const MyApp: React.FC = () => {
     itemBg,
     headerBg,
   } = useAppSelector(ThemeState);
+  const { xs } = useBreakpoints();
 
   const isLight: boolean = mode === "light" ? true : false;
+
+  const getAlgorithm = () => {
+    if (xs) {
+      return [
+        isLight ? theme.defaultAlgorithm : theme.darkAlgorithm,
+        theme.compactAlgorithm,
+      ];
+    }
+    return isLight ? theme.defaultAlgorithm : theme.darkAlgorithm;
+  };
 
   return (
     <ConfigProvider
       theme={{
-        algorithm: isLight ? theme.defaultAlgorithm : theme.darkAlgorithm,
+        algorithm: getAlgorithm(),
         token: {
           colorPrimary,
           fontFamily,
@@ -54,16 +66,16 @@ const MyApp: React.FC = () => {
         <FloatButton.BackTop />
         <Helmet>
           <title>{siteConfig.name}</title>
-          <meta charSet='UTF-8' />
-          <meta name='description' content={siteConfig.description} />
+          <meta charSet="UTF-8" />
+          <meta name="description" content={siteConfig.description} />
           <meta
-            name='keywords'
-            content='React, Ant Design, Redux, App, Dashboard'
+            name="keywords"
+            content="React, Ant Design, Redux, App, Dashboard"
           />
-          <meta name='author' content={siteConfig.author} />
+          <meta name="author" content={siteConfig.author} />
           <meta
-            name='viewport'
-            content='width=device-width, initial-scale=1.0'
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
           />
         </Helmet>
       </App>

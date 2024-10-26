@@ -21,9 +21,9 @@ const Students: React.FC = () => {
   return (
     <React.Fragment>
       <Container
-        title='Student List'
+        title="Student List"
         content={<StudentList />}
-        buttonLabel='Create Student'
+        buttonLabel="Create Student"
         openModal={{
           title: "Create Student",
           content: <CreateStudent />,
@@ -32,7 +32,7 @@ const Students: React.FC = () => {
         filterContent={[
           <Select
             value={filters.gender}
-            width='100%'
+            width="100%"
             options={[
               { label: "Male", value: "Male" },
               { label: "Female", value: "Female" },
@@ -44,7 +44,7 @@ const Students: React.FC = () => {
 
           <Select
             value={filters.status}
-            width='100%'
+            width="100%"
             options={[
               { label: "Success", value: "Success" },
               { label: "Pending", value: "Pending" },

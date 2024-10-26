@@ -50,16 +50,19 @@ const Upload: React.FC<Props> = ({
     const isLt2M = file.size / 1024 / 1024 < (size || 2);
     if (!isLt2M) {
       message.error(`Image must be smaller than ${size || 2}MB!`);
+      return AntUpload.LIST_IGNORE;
     }
-    return isLt2M;
+    return false;
   };
 
-  const handleChange: UploadProps["onChange"] = ({ fileList }) => {
+  const handleChange: UploadProps["onChange"] = ({ fileList }): void => {
     const updatedFileList = fileList
       .filter((file) => file.size && file.size / 1024 / 1024 < (size || 2))
       .map((file) => {
         if (file.status === "done" && file.response) {
-          file.url = file.response.url;
+          console.log("Upload Response: ", file.response);
+          file.url =
+            file.response.url || file.response.fileUrl || file.response.path;
         }
         return file;
       });
@@ -79,11 +82,11 @@ const Upload: React.FC<Props> = ({
         accept={accept}
       >
         {listType === "picture-card" || listType === "picture-circle" ? (
-          <Iconify icon='ant-design:plus-outlined' />
+          <Iconify icon="ant-design:plus-outlined" />
         ) : (
           <Button
-            type='default'
-            icon={<Iconify icon='ant-design:plus-outlined' />}
+            type="default"
+            icon={<Iconify icon="ant-design:plus-outlined" />}
           >
             Click to Upload
           </Button>
